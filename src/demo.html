@@ -6,9 +6,15 @@
 <link rel="stylesheet" type="text/css" href="./styles.css" />
 </head>
 <body>
-<div id="J_PublishBox">
-  <div role="textbox"></div>
-  <div role="button">确认</div>
+<div class="publishbox">
+  <div class="textbox-wrap">
+    <div id="J_TextBox" class="textbox"></div>
+  </div>
+  <div id="J_Button" class="button">确认</div>
+  <p>输入内容:</p>
+  <pre id="J_Content"></pre>
+  <p>包含ID：</p>
+  <pre id="J_Ids"></pre>
 </div>
 <script src="http://cdn.menkr.com/sea.js" data-main="./demo.js"></script>
 </body>
