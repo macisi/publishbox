@@ -317,6 +317,8 @@ define(function(require, exports, module) {
 
     /**
      * 获取/设置输入框中文字
+     * @param text {String} 可选，设置的文字
+     * @returns 内容文字
      */
     val: function(text) {
       if (text) {
@@ -328,6 +330,7 @@ define(function(require, exports, module) {
 
     /**
      * 获取输入框中所有@对象的id列表
+     * @returns {Array<String>} ID列表
      */
     ids: function() {
       var nodes = this.view.box.childNodes;

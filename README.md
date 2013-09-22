@@ -2,6 +2,7 @@ publishbox
 ==========
 
 A publish box with @ function
+Support IE>8, Firefox, Chrome, Safari
 
 ## Preview
 
@@ -10,11 +11,21 @@ A publish box with @ function
 ## Usage
 
 ``` js
+// init
 var publishBox = new PublishBox({
-  textbox: '#J_TextBox', // 输入框选择器
-  queryFriendsUrl: './mock/query_friends.json?q=', // 提示好友查询地址
-  maxSize: 20 // 提示最大长度
+  textbox: '#J_TextBox', // input box selector
+  queryFriendsUrl: './mock/query_friends.json?q=', // query url
+  maxSize: 20 // max size of tip
 });
+
+// set value
+publishBox.val('hello world!');
+
+// get value
+var value = publishBox.val();
+
+// get IDs in the input box
+var ids = publishBox.ids();
 ```
 
 ## License
