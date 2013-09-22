@@ -48,6 +48,7 @@ define(function(require, exports, module) {
           if (evt.shiftKey && evt.keyCode == 50) { // @：重新开启提示
             that._abort();
             that._open();
+            E.halt(evt);
           } else if (evt.keyCode == 32) { // 空格：关闭提示
             that._abort();
           } else if (evt.keyCode == 13) { // 回车：有高亮时选中，否则关闭提示
@@ -70,9 +71,12 @@ define(function(require, exports, module) {
           }
         } else if (evt.shiftKey && evt.keyCode == 50) { // @：开启提示
           that._open();
-        } else if (evt.keyCode == 13) { // 回车：修改默认行为-插入<br/>
-          that._enter();
           E.halt(evt);
+        } else if (evt.keyCode == 13) { // 回车：修改默认行为-插入<br/>
+          if (navigator.userAgent.indexOf('Firefox')  == -1) { // 火狐是正常的，其他浏览器有问题
+            that._enter();
+            E.halt(evt);
+          }
         }
       });
 
@@ -118,16 +122,14 @@ define(function(require, exports, module) {
       if (sel.rangeCount) {
         var range = sel.getRangeAt(0);
         this.state.open = true;
-        setTimeout(function() {
-          var node = document.createElement('span');
-          node.className = 'input';
-          range.setEnd(range.endContainer, range.startOffset + 1);
-          range.surroundContents(node);
-          range = document.createRange();
-          range.setStart(node, 1);
-          sel.removeAllRanges();
-          sel.addRange(range);
-        }, 0);
+        var node = document.createElement('span');
+        node.className = 'input';
+        node.innerHTML = '@';
+        range.insertNode(node);
+        range = document.createRange();
+        range.setStart(node, 1);
+        sel.removeAllRanges();
+        sel.addRange(range);
       }
     },
 
@@ -250,7 +252,7 @@ define(function(require, exports, module) {
         var hover = this.state.hover;
         var input = box.querySelector('.input');
         if (input) {
-          input.innerHTML = '+' + hover.querySelector('.nick').innerHTML;
+          input.innerHTML = '+' + hover.querySelector('[role="nick"]').innerHTML;
           input.setAttribute('data-id', D.attr(hover, 'data-id'));
           input.className = 'at';
           input.contentEditable = false;

@@ -1,5 +1,8 @@
 define(function(require, exports, module) {
 
+  /**
+   * 事件绑定
+   */
   exports.on = function(ele, type, fn) {
     if (document.addEventListener) {
       ele.addEventListener(type, fn, false);
@@ -8,6 +11,9 @@ define(function(require, exports, module) {
     }
   };
 
+  /**
+   * 取消冒泡
+   */
   exports.halt = function(e) {
     if (e.preventDefault) {
       e.preventDefault();

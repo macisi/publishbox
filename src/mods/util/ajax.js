@@ -1,5 +1,8 @@
 define(function(require, exports, module) {
 
+  /**
+   * XHR GET请求
+   */
   exports.get = function(url, callback) {
     var xhr = new XMLHttpRequest();
     xhr.onreadystatechange = function() {

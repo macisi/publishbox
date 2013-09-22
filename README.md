@@ -10,10 +10,14 @@ A publish box with @ function
 ## Usage
 
 ``` js
-var foo = 0;
+var publishBox = new PublishBox({
+  textbox: '#J_TextBox', // 输入框选择器
+  queryFriendsUrl: './mock/query_friends.json?q=', // 提示好友查询地址
+  maxSize: 20 // 提示最大长度
+});
 ```
 
-## License 
+## License
 
 (The MIT License)
 

@@ -20,8 +20,14 @@ define(function(require, exports, module) {
       }
     };
 
+  /**
+   * 获取结点内文字
+   */
   exports.text = getText;
 
+  /**
+   * 获取结点绝对偏移量
+   */
   exports.offset = function(ele) {
     var x = 0;
     var y = 0;
@@ -36,6 +42,9 @@ define(function(require, exports, module) {
     };
   };
 
+  /**
+   * 获取/设置属性
+   */
   exports.attr = function(ele, key, value) {
     if (value === undefined) { // getter
       if (ele && ele.getAttribute) {

@@ -19,11 +19,10 @@ body {
   cursor: pointer;
   font-size: 1.2em;
 }
-.publishbox pre {
+.publishbox .result {
   min-height: 2em;
   border: solid 1px #bbb;
 }
-
 .publishbox .textbox-wrap,
 .publishbox .textbox {
   width: 380px;
@@ -33,6 +32,8 @@ body {
   padding: 10px;
   border: solid 1px #bbb;
 }
+
+/* PublishBox Begin */
 .publishbox .textbox {
   outline: none;
   overflow-x: hidden;
@@ -50,7 +51,6 @@ body {
   border: solid 1px #ddd;
   color: #427fed;
 }
-
 .publishbox-menu,
 .publishbox-menu li {
   list-style: none;
@@ -89,3 +89,4 @@ body {
 .publishbox-menu li .group {
   color: #999;
 }
+/* PublishBox End */
