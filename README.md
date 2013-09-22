@@ -2,6 +2,7 @@ publishbox
 ==========
 
 A publish box with @ function
+
 Support IE>8, Firefox, Chrome, Safari
 
 ## Preview
