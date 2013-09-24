@@ -1,0 +1,10 @@
+{
+  "name": "health-information-management",
+  "version": "0.0.1",
+  "description": "the web-side client of health information management",
+  "author": "macisi",
+  "devDependencies": {
+    "grunt": "~0.4.1",
+    "grunt-contrib-connect": "~0.3.0"
+  }
+}
