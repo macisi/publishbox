@@ -2,6 +2,7 @@ define(function(require, exports, module) {
   var E = require('../util/event');
   var D = require('../util/dom');
   var A = require('../util/ajax');
+  // var selection = require('../util/selection');
 
   var TPL_MENU = require('./tpl/menu');
 
@@ -73,6 +74,7 @@ define(function(require, exports, module) {
           that._open();
           E.halt(evt);
         } else if (evt.keyCode == 13) { // 回车：修改默认行为-插入<br/>
+          //todo: 为什么要插入br
           if (navigator.userAgent.indexOf('Firefox')  == -1) { // 火狐是正常的，其他浏览器有问题
             that._enter();
             E.halt(evt);
@@ -84,9 +86,9 @@ define(function(require, exports, module) {
       menu.className = 'publishbox-menu';
       document.body.appendChild(menu);
       E.on(menu, 'mousemove', function(evt) { // 鼠标高亮选项
-        var target = evt.target;
+        var target = evt.target || evt.srcElement;
         while (D.attr(target, 'role') != 'menuItem') {
-          if (target == this) {
+          if (target == menu) {
             return;
           }
           target = target.parentNode;
@@ -100,7 +102,7 @@ define(function(require, exports, module) {
         }
       });
       E.on(document, 'click', function(evt) { // 鼠标点击选项
-        var target = evt.target;
+        var target = evt.target || evt.srcElement;
         var loop = 3;
         while (loop-- > 0 && target && D.attr(target, 'role') != 'menuItem') {
           target = target.parentNode;
@@ -118,18 +120,34 @@ define(function(require, exports, module) {
      * 开启提示
      */
     _open: function() {
-      var sel = getSelection();
-      if (sel.rangeCount) {
-        var range = sel.getRangeAt(0);
-        this.state.open = true;
-        var node = document.createElement('span');
-        node.className = 'input';
-        node.innerHTML = '@';
-        range.insertNode(node);
-        range = document.createRange();
-        range.setStart(node, 1);
-        sel.removeAllRanges();
-        sel.addRange(range);
+      var sel, range;
+      var node = document.createElement('span');
+      node.className = 'input';
+      node.innerHTML = '@';
+      if (window.getSelection) {
+        sel = window.getSelection();
+        range = sel && sel.getRangeAt(0);
+        if (range) {
+          this.state.open = true;
+          range.insertNode(node);
+          //safari prior to version 3 does not support getRangeAt
+          // range = document.createRange();
+          // range.setStart(node, 1);
+          range.setStartAfter(node);
+          sel.removeAllRanges();
+          sel.addRange(range);
+        }
+      } else {
+        sel = document.selection;
+        if (sel.type !== 'Control') {
+          range = sel && sel.createRange();
+          if (range) {
+            this.state.open = true;
+            range.pasteHTML('<span class=\'input\'>@</span>');
+            range.moveStart("character", -1);
+            range.select();
+          }
+        }
       }
     },
 
@@ -153,8 +171,8 @@ define(function(require, exports, module) {
       if (input) { // 文字结点合并
         var prev = input.previousSibling;
         var next = input.nextSlibing;
-        var prevIsText = prev && prev.nodeType == 3;
-        var nextIsText = next && next.nodeType == 3;
+        var prevIsText = prev && prev.nodeType === 3;
+        var nextIsText = next && next.nodeType === 3;
         var container = null;
         var index = 0;
         if (prevIsText && nextIsText) { // 前后都是文字结点
@@ -188,11 +206,14 @@ define(function(require, exports, module) {
           container = next;
         }
         // 创建选区
-        var sel = getSelection();
-        var range = document.createRange();
-        range.setStart(container, index);
-        sel.removeAllRanges();
-        sel.addRange(range);
+        // todo: 好像没什么作用
+        // if (window.getSelection) {
+        //   var sel = getSelection();
+        //   var range = document.createRange();
+        //   range.setStart(container, index);
+        //   sel.removeAllRanges();
+        //   sel.addRange(range);
+        // }
       }
       this._close();
     },
@@ -251,18 +272,34 @@ define(function(require, exports, module) {
         var box = this.view.box;
         var hover = this.state.hover;
         var input = box.querySelector('.input');
+        var sel, range, label;
         if (input) {
-          input.innerHTML = '+' + hover.querySelector('[role="nick"]').innerHTML;
-          input.setAttribute('data-id', D.attr(hover, 'data-id'));
-          input.className = 'at';
-          input.contentEditable = false;
+          if (navigator.userAgent.indexOf('Firefox') === -1) {
+            label = document.createElement('button');
+            label.innerHTML = '+' + hover.querySelector('[role="nick"]').innerHTML;
+            label.contentEditable = false;
+          } else {
+            label = document.createElement('input');
+            label.type = "button";
+            label.value = '+' + hover.querySelector('[role="nick"]').innerHTML;
+          }
+          label.setAttribute('data-id', D.attr(hover, 'data-id'));
+          label.setAttribute('tabindex', -1);
+          label.className = 'at';
+
+          box.insertBefore(label, input);
+          box.removeChild(input);
           // 创建选区
-          var sel = getSelection();
-          var range = document.createRange();
-          range.setEndAfter(input);
-          range.setStartAfter(input);
-          sel.removeAllRanges();
-          sel.addRange(range);
+          if (window.getSelection) {
+            sel = getSelection();
+            range = document.createRange();
+            range.setEndAfter(label);
+            range.setStartAfter(label);
+            sel.removeAllRanges();
+            sel.addRange(range);
+          } else {
+            box.focus();
+          }
         }
       }
       this._close();

@@ -18,6 +18,7 @@ define(function(require, exports, module) {
       } else if (nodeType === 3 || nodeType === 4) {
         ret += ele.nodeValue;
       }
+      return ret;
     };
 
   /**
