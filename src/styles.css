@@ -39,19 +39,22 @@ body {
   overflow-x: hidden;
   overflow-y: auto;
 }
-.publishbox .input,
+.publishbox .input {
+  
+}
 .publishbox .at {
   display: inline-block;
-  white-space: nowrap;
-  color: #f00;
-}
-.publishbox .at {
-  padding: .1em .2em;
-  margin: 0 .2em;
-  background: #eee;
-  border: solid 1px #ddd;
+  margin: 0px 1px;
+  padding: 0px 1px;
+  background-color: #eee;
+  border: 1px solid #ddd;
+  border-radius: 2px;
+  font: 13px/1.4 arial,sans-serif;
+  vertical-align: baseline;
   color: #427fed;
+  white-space: nowrap;
 }
+
 .publishbox-menu,
 .publishbox-menu li {
   list-style: none;

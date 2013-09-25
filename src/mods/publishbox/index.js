@@ -131,9 +131,8 @@ define(function(require, exports, module) {
           this.state.open = true;
           range.insertNode(node);
           //safari prior to version 3 does not support getRangeAt
-          // range = document.createRange();
-          // range.setStart(node, 1);
-          range.setStartAfter(node);
+          range = document.createRange();
+          range.setStart(node, 1);
           sel.removeAllRanges();
           sel.addRange(range);
         }
@@ -199,10 +198,10 @@ define(function(require, exports, module) {
         } else { // 前后都不是文字结点
           var text = D.text(input);
           index = text.length;
-          next = document.createTextNode();
+          next = document.createTextNode(text);
           box.insertBefore(next, input);
           box.removeChild(input);
-          next.nodeValue = text;
+          // next.nodeValue = text;
           container = next;
         }
         // 创建选区
@@ -272,6 +271,7 @@ define(function(require, exports, module) {
         var box = this.view.box;
         var hover = this.state.hover;
         var input = box.querySelector('.input');
+        var space = document.createTextNode(" ");
         var sel, range, label;
         if (input) {
           if (navigator.userAgent.indexOf('Firefox') === -1) {
@@ -288,15 +288,18 @@ define(function(require, exports, module) {
           label.className = 'at';
 
           box.insertBefore(label, input);
+          box.insertBefore(space, input);
+
           box.removeChild(input);
           // 创建选区
           if (window.getSelection) {
             sel = getSelection();
             range = document.createRange();
-            range.setEndAfter(label);
-            range.setStartAfter(label);
+            range.setEndAfter(space);
+            range.setStartAfter(space);
             sel.removeAllRanges();
             sel.addRange(range);
+            box.focus();
           } else {
             box.focus();
           }
