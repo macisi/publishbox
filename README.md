@@ -1,55 +1,12 @@
-publishbox
-==========
+# AtSelection
 
-A publish box with @ function.
+---
 
-Support IE>8, Firefox, Chrome, Safari
+// description
 
-## Preview
+---
 
-![publishbox preview](https://raw.github.com/gbk/publishbox/master/preview.png)
+## 使用说明
 
-## Usage
 
-``` js
-// init
-var publishBox = new PublishBox({
-  textbox: '#J_TextBox', // input box selector
-  queryFriendsUrl: './mock/query_friends.json?q=', // query url
-  maxSize: 20 // max size of tip
-});
-
-// set value
-publishBox.val('hello world!');
-
-// get value
-var value = publishBox.val();
-
-// get IDs in the input box
-var ids = publishBox.ids();
-```
-
-## License
-
-(The MIT License)
-
-Copyright (c) 2013 - 2099 gbk &lt;ck0123456@gmail.com&gt;
-
-Permission is hereby granted, free of charge, to any person obtaining
-a copy of this software and associated documentation files (the
-'Software'), to deal in the Software without restriction, including
-without limitation the rights to use, copy, modify, merge, publish,
-distribute, sublicense, and/or sell copies of the Software, and to
-permit persons to whom the Software is furnished to do so, subject to
-the following conditions:
-
-The above copyright notice and this permission notice shall be
-included in all copies or substantial portions of the Software.
-
-THE SOFTWARE IS PROVIDED 'AS IS', WITHOUT WARRANTY OF ANY KIND,
-EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
-MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT.
-IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY
-CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT,
-TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE
-SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+## API

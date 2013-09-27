@@ -1,0 +1,27 @@
+{
+  "family": "arale",
+  "name": "At-selection",
+  "version": "1.0.0",
+  "description": "This compoment is inspired by google+'s person selecting.",
+  "homepage": "https://github.com/macisi/publishbox",
+  "author": "",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/macisi/publishbox"
+  },
+  "bugs": {
+    "url": ""
+  },
+  "keywords": ["widget"],
+  "licenses": "MIT",
+  "spm": {
+    "output": ["AtSelection.js"],
+    "alias": {
+      "$": "$"
+    },
+    "devAlias": {
+      "$": "$"
+    },
+    "engines": {}
+  }
+}
