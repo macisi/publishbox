@@ -6,7 +6,7 @@ define(function(require, exports, module) {
   var atSelection = new AtSelection({
     textbox: '#J_TextBox', // 输入框选择器
     queryFriendsUrl: './mock/query_friends.json?q=', // 提示好友查询地址
-    maxSize: 20, // 提示最大长度,
+    maxSize: 20, // 搜索query的最大长度,
     show: 5, //提示选择最大的数量
     template: require('./tpl')
   });

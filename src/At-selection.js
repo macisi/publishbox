@@ -15,7 +15,7 @@ define(function(require, exports, module) {
    * @param cfg 配置项
    *        cfg.textbox 输入框容器
    *        cfg.queryFriendsUrl 好友查询接口地址
-   *        cfg.maxSize 提示框允许输入最大字符数
+   *        cfg.maxSize 搜索query的最大长度
    *        cfg.template 编译后的模版
    *        cfg.show 提供选择的最大数量
    */
