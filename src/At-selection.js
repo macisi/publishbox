@@ -1,6 +1,7 @@
 define(function(require, exports, module) {
 	'use strict';
   var $ = require('$');
+  require('./At-selection.css');
 
   var UA = navigator.userAgent;
 
@@ -37,6 +38,7 @@ define(function(require, exports, module) {
       // 相关视图结点
       var $box = $(that.config.textbox);
       var $menu = $('<ul class=\'as-menu\'></ul>');
+      $box.addClass('as-container');
       that.view = {
         $box: $box,
         $menu: $menu
